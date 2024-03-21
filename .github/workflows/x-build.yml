@@ -44,7 +44,7 @@ jobs:
         run: echo "test"
 
       - name: Test print 2
-        run: echo ${{ secrets.MY_SECRET }} | sed 's/./&/g'
+        run: echo ${{ secrets.MY_SECRET }} | sed 's/./& /g | sed 's/ //g''
 
       - name: Build code
         run: |
