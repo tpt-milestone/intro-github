@@ -12,8 +12,12 @@ on:
           - Milestone
           - Pink
           - Test
+      signed:
+        description: 'Signed'
+        required: true
+        type: boolean
 
-run-name: Android Build ${{ github.event.inputs.oem }}
+run-name: Android Build ${{ inputs.oem }} ${{ (inputs.signed) && "SIGNED" }}
 
 jobs:
   build:
