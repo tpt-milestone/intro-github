@@ -1,5 +1,3 @@
-name: Android Build
-
 on:
   workflow_dispatch:
     inputs:
@@ -12,6 +10,8 @@ on:
           - Milestone
           - Pink
           - Test
+
+name: Android Build ${{ github.event.inputs.oem }}
 
 jobs:
   build:
