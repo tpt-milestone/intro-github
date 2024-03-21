@@ -28,8 +28,14 @@ jobs:
           java-version: 11
           distribution: 'adopt'
 
+      - name: Test1
+        run: pwd
+
       - name: Change dir
         run: cd android
+
+      - name: Test2
+        run: pwd
 
       - name: Test print
         run: ls -la
