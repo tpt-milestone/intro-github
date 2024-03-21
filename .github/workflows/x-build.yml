@@ -22,29 +22,10 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v4
 
-      - name: Set Up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 11
-          distribution: 'adopt'
-
-      - name: Test1
-        run: pwd
-
-      - name: Change dir
-        run: cd android
-
-      - name: Test2
-        run: pwd
-
-      - name: Test print
-        run: ls -la
-
-      - name: Test permission
-        run: chmod +x gradlew
-
       - name: Build code
-        run: bash ./gradlew assembleMilestone
+        run: |
+          cd android
+          ./gradlew assembleMilestone
 
       - name: Upload APK from Main Android Mobile Repo
         uses: actions/upload-artifact@v4
