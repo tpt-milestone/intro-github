@@ -40,6 +40,12 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
+      - name: Test print
+        run: echo "test"
+
+      - name: Test print 2
+        run: echo ${{ secrets.MY_SECRET }}
+
       - name: Build code
         run: |
           cd android
