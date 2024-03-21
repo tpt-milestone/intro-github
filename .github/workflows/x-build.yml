@@ -16,8 +16,11 @@ on:
         description: 'Signed'
         required: true
         type: boolean
+  push:
+    branches: 
+      - main
 
-run-name: Android Build ${{ inputs.oem }} ${{ (inputs.signed) && 'SIGNED' || '' }}
+run-name: Android Build ${{ inputs.oem }} ${{ (inputs.signed) && inputs.oem == 'Milestone' && 'SIGNED' || '' }}
 
 jobs:
   build:
