@@ -17,7 +17,7 @@ on:
         required: true
         type: boolean
 
-run-name: Android Build ${{ inputs.oem }} ${{ (inputs.signed) && 'SIGNED' }}
+run-name: Android Build ${{ inputs.oem }} ${{ (inputs.signed) && 'SIGNED' || '' }}
 
 jobs:
   build:
