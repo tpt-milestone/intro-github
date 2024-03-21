@@ -31,10 +31,10 @@ jobs:
       - name: Build code
         run: |
           cd android
-          ./gradlew assembleMilestone
+          ./gradlew assemble${{ github.event.inputs.oem }}
 
       - name: Upload APK from Main Android Mobile Repo
         uses: actions/upload-artifact@v4
         with:
-          name: main-android-apk
+          name: main-android-apk-${{ github.event.inputs.oem }}
           path: android/app/build/outputs/apk
