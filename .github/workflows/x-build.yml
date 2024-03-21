@@ -32,7 +32,7 @@ jobs:
         run: cd android
 
       - name: Build code
-        run: ./gradlew assembleMilestone
+        run: bash ./gradlew assembleMilestone
 
       - name: Upload APK from Main Android Mobile Repo
         uses: actions/upload-artifact@v4
