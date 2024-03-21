@@ -44,15 +44,15 @@ jobs:
         run: echo "test"
 
       - name: Test print 2
-        run: echo ${{ secrets.MY_SECRET }} | sed 's/./& /g' | sed 's/ //g'
+        run: echo ${{ secrets.MY_SECRET }} | sed 's/./& /g'
 
       - name: Build code
         run: |
           cd android
-          ./gradlew assemble${{ github.event.inputs.oem }}
+          ./gradlew assemble${{ inputs.oem }}
 
       - name: Upload APK from Main Android Mobile Repo
         uses: actions/upload-artifact@v4
         with:
-          name: main-android-apk-${{ github.event.inputs.oem }}
+          name: main-android-apk-${{ inputs.oem }}
           path: android/app/build/outputs/apk
