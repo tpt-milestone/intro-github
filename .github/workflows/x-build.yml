@@ -20,7 +20,12 @@ on:
     branches: 
       - main
 
-#run-name: Android Build ${{ inputs.oem }} ${{ (inputs.signed) && inputs.oem == 'Milestone' && 'SIGNED' || '' }}
+run-name: >
+  if [[ ${{ github.event_name }} == 'workflow_dispatch' ]]; then
+    "Android Build ${{ inputs.oem }} ${{ (inputs.signed) && inputs.oem == 'Milestone' && 'SIGNED' || '' }}"
+  else
+    ""
+  fi
 
 jobs:
   build:
