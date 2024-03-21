@@ -21,11 +21,9 @@ on:
       - main
 
 run-name: >-
-  if [[ ${{ github.event_name }} == 'workflow_dispatch' ]]; then
-    "Android Build ${{ inputs.oem }} ${{ (inputs.signed) && inputs.oem == 'Milestone' && 'SIGNED' || '' }}"
-  else
-    ""
-  fi
+  ${{ github.event_name == 'workflow_dispatch'
+    && "Android Build ${{ inputs.oem }} ${{ (inputs.signed) && inputs.oem == 'Milestone' && 'SIGNED' || '' }}"
+    || "" }}
 
 jobs:
   build:
