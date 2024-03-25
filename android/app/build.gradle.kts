@@ -20,6 +20,15 @@ android {
         }
     }
 
+    signingConfigs {
+        create("MilestoneInternal") {
+            storeFile = file("keystore.jks")
+            storePassword = System.getenv("SIGNING_STORE_PASSWORD")
+            keyAlias = System.getenv("SIGNING_KEY_ALIAS")
+            keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -36,6 +45,7 @@ android {
         create("Milestone") {
             buildConfigField ("String", "flavor_value", "\"Milestone\"")
             buildConfigField ("Boolean", "is_oem", "false")
+            signingConfig = signingConfigs.getByName("MilestoneInternal")
         }
         create("Pink") {
             buildConfigField ("String", "flavor_value", "\"Pink\"")
