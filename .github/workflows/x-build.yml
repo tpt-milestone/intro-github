@@ -19,6 +19,7 @@ on:
   push:
     branches: 
       - main
+      - test-name
 
 run-name: ${{ github.event_name == 'workflow_dispatch' && format('Android Build {0}', inputs.oem) || '' }}
 
