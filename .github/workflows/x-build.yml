@@ -20,10 +20,7 @@ on:
     branches: 
       - main
 
-run-name: >-
-  ${{ github.event_name == 'workflow_dispatch'
-    && format('Android Build {0} {1}', inputs.oem, (inputs.signed) && inputs.oem == 'Milestone' && 'SIGNED' || '')
-    || '' }}
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('Android Build {0}', inputs.oem) || '' }}
 
 jobs:
   build:
