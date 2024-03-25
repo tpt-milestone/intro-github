@@ -1,5 +1,8 @@
 name: Android Build
 
+env:
+  TEST_FL: ${{ inputs.oem || 'latest' }}
+  
 on:
   workflow_dispatch:
     inputs:
@@ -19,9 +22,6 @@ on:
   push:
     branches: 
       - main
-
-env:
-  TEST_FL: ${{ inputs.oem || 'latest' }}
 
 run-name: >-
   ${{ github.event_name == 'workflow_dispatch'
