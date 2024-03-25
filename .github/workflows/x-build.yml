@@ -20,6 +20,9 @@ on:
     branches: 
       - main
 
+env:
+  TEST_FL: ${{ inputs.oem || 'latest' }}
+
 run-name: >-
   ${{ github.event_name == 'workflow_dispatch'
     && format('Android Build {0} {1}', inputs.oem, (inputs.signed) && inputs.oem == 'Milestone' && 'SIGNED' || '')
@@ -61,7 +64,7 @@ jobs:
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
         run: |
           cd android
-          ./gradlew assemble${{ inputs.oem }}
+          ./gradlew assemble${{ env.TEST_FL }}
 
       - name: Upload APK from Main Android Mobile Repo
         uses: actions/upload-artifact@v4
