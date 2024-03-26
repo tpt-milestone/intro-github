@@ -26,7 +26,7 @@ on:
 
 run-name: >-
   ${{ github.event_name == 'workflow_dispatch'
-    && format('Android Build {0}{1}', inputs.oem, $IS_SIGNED && ' Signed' || '')
+    && format('Android Build {0}{1}', inputs.oem, (inputs.signed) && ' Signed' || '')
     || '' }}
 
 jobs:
@@ -101,7 +101,7 @@ jobs:
       - name: Rename file
         run: |
           cd android/app/build/outputs/apk/${{ env.TEST_FL }}/release
-          mv app-Milestone-release.apk app-Milestone-release${{ (inputs.signed) && inputs.oem == 'Milestone' && '_signed' || '' }}.apk
+          mv app-Milestone-release.apk app-Milestone-release${{ env.IS_SIGNED && '_signed' || '' }}.apk
 
       - name: Upload APK from Main Android Mobile Repo
         uses: actions/upload-artifact@v4
