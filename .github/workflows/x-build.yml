@@ -68,8 +68,8 @@ jobs:
       - name: Test config 3
         run: |
           cat <<EOF > android/keystore.properties
-          storePassword=${{ env.TEST_FL }}
-          keyPassword=${{ github.event_name }}
+            storePassword=${{ env.TEST_FL }}
+            keyPassword=${{ github.event_name }}
           keyAlias=alias
           storeFile=key/release-key.keystore
           EOF
