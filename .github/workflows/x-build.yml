@@ -26,7 +26,7 @@ on:
 
 run-name: >-
   ${{ github.event_name == 'workflow_dispatch'
-    && format('Android Build {0}{1}', inputs.oem, (inputs.signed) && inputs.oem == 'Milestone' && ' Signed' || '')
+    && format('Android Build {0}{1}', inputs.oem, $IS_SIGNED && ' Signed' || '')
     || '' }}
 
 jobs:
