@@ -100,7 +100,7 @@ jobs:
 
       - name: Rename file
         run: |
-          cd android/apk/build/outputs/apk/${{ env.TEST_FL }}/release
+          cd android/app/build/outputs/apk/${{ env.TEST_FL }}/release
           mv app-Milestone-release.apk app-Milestone-release${{ (inputs.signed) && inputs.oem == 'Milestone' && '_signed' || '' }}
 
       - name: Upload APK from Main Android Mobile Repo
