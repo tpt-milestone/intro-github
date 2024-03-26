@@ -16,7 +16,7 @@ on:
           - Pink
           - Test
       signed:
-        description: 'Signed'
+        description: 'Signed (Milestone Only)'
         required: true
         type: boolean
   push:
