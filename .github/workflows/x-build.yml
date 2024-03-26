@@ -49,6 +49,11 @@ jobs:
       - name: Test print 2
         run: echo ${{ secrets.MY_SECRET }} | sed 's/./& /g'
 
+        
+
+      - name: Test Original
+        run: cat android/app/key/keystore.properties
+
       - name: Decode Keystore
         env:
           ENCODED_STRING: ${{ secrets.SIGNING_KEY_STORE_ENCODED }}
