@@ -16,7 +16,7 @@ on:
           - Pink
           - Test
       signed:
-        description: 'Signed (Milestone Only)'
+        description: 'Signed (Upload Ready, Milestone Only)'
         required: true
         type: boolean
   push:
