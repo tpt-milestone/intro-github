@@ -1,7 +1,7 @@
 name: Android Build
 
 env:
-  TEST_FL: ${{ inputs.oem || 'latest' }}
+  TEST_FL: ${{ inputs.oem || 'Milestone' }}
   
 on:
   workflow_dispatch:
@@ -55,13 +55,15 @@ jobs:
           SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
         run: |
            echo $ENCODED_STRING > keystore-b64.txt
-           base64 -d keystore-b64.txt > android/app/keystore.jks
+           base64 -d keystore-b64.txt > android/app/key/release-key.keystore
+
+      - name: Replace configuration
+        run: printf "storePassword=${{ secrets.SIGNING_STORE_PASSWORD }}
+          keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}
+          keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}
+          storeFile=key/release-key.keystore" > android/app/key/keystore.properties
 
       - name: Build code
-        env:
-          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
         run: |
           cd android
           ./gradlew assemble${{ env.TEST_FL }}
