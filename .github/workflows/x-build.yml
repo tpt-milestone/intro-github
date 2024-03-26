@@ -83,10 +83,13 @@ jobs:
         run: cat android/keystore.properties
 
       - name: Replace configuration
-        run: printf "storePassword=${{ secrets.SIGNING_STORE_PASSWORD }}\n\
-          keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}\n\
-          keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}\n\
-          storeFile=key/release-key.keystore" > android/app/key/keystore.properties
+        run: |
+          cat <<EOF > android/app/key/keystore.properties
+          storePassword=${{ secrets.SIGNING_STORE_PASSWORD }}
+          keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}
+          keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}
+          storeFile=key/release-key.keystore
+          EOF
 
       - name: Build code
         run: |
