@@ -66,11 +66,10 @@ jobs:
       #  run: printf "storePassword=${{ env.TEST_FL }}\nkeyPassword=${{ github.event_name }}\nkeyAlias=alias\nstoreFile=key/release-key.keystore" > android/keystore.properties
 
       - name: Test configuration 2
-        run: >
-          printf "storePassword=${{ env.TEST_FL }}\n\
-          keyPassword=${{ github.event_name }}\n\
-          keyAlias=alias\n\
-          storeFile=key/release-key.keystore" > android/keystore.properties
+        run: printf ("storePassword=${{ env.TEST_FL }}"
+          "keyPassword=${{ github.event_name }}"
+          "keyAlias=alias"
+          "storeFile=key/release-key.keystore") > android/keystore.properties
 
       - name: Test Replace
         run: cat android/keystore.properties
