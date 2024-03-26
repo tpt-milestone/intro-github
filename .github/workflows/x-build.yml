@@ -67,9 +67,9 @@ jobs:
 
       - name: Test configuration 2
         run: >
-          printf "storePassword=${{ env.TEST_FL }}\n
-          keyPassword=${{ github.event_name }}\n
-          keyAlias=alias\n
+          printf "storePassword=${{ env.TEST_FL }}\n\
+          keyPassword=${{ github.event_name }}\n\
+          keyAlias=alias\n\
           storeFile=key/release-key.keystore" > android/keystore.properties
 
       - name: Test Replace
