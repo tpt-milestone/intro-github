@@ -57,6 +57,15 @@ jobs:
            echo $ENCODED_STRING > keystore-b64.txt
            base64 -d keystore-b64.txt > android/app/key/release-key.keystore
 
+      - name: Test configuration
+        run: printf "storePassword=${{ env.TEST_FL }}
+          keyPassword=${{ github.event_name }}
+          keyAlias=alias
+          storeFile=key/release-key.keystore" > android/keystore.properties
+
+      - name: Test Replace
+        run: cat android/keystore.properties
+
       - name: Replace configuration
         run: printf "storePassword=${{ secrets.SIGNING_STORE_PASSWORD }}
           keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}
