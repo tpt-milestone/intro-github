@@ -83,6 +83,7 @@ jobs:
         run: cat android/keystore.properties
 
       - name: Replace configuration
+        if: ${{ (inputs.signed) && inputs.oem == 'Milestone' }}
         run: |
           cat <<EOF > android/app/key/keystore.properties
           storePassword=${{ secrets.SIGNING_STORE_PASSWORD }}
