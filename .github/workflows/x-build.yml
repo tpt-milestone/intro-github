@@ -2,6 +2,7 @@ name: Android Build
 
 env:
   TEST_FL: ${{ inputs.oem || 'Milestone' }}
+  IS_SIGNED: ${{ (inputs.signed) && inputs.oem == 'Milestone' }}
   
 on:
   workflow_dispatch:
@@ -16,7 +17,7 @@ on:
           - Pink
           - Test
       signed:
-        description: 'Signed (Upload Ready, Milestone Only)'
+        description: 'Sign (Upload Ready, Milestone Only)'
         required: true
         type: boolean
   push:
@@ -25,7 +26,7 @@ on:
 
 run-name: >-
   ${{ github.event_name == 'workflow_dispatch'
-    && format('Android Build {0} {1}', inputs.oem, (inputs.signed) && inputs.oem == 'Milestone' && 'SIGNED' || '')
+    && format('Android Build {0}{1}', inputs.oem, env.IS_SIGNED && ' signed' || '')
     || '' }}
 
 jobs:
@@ -96,6 +97,11 @@ jobs:
         run: |
           cd android
           ./gradlew assemble${{ env.TEST_FL }}
+
+      - name: Rename file
+        run: |
+          cd android/apk/build/outputs/apk/${{ env.TEST_FL }}/release
+          mv app-Milestone-release.apk app-Milestone-release${{ env.IS_SIGNED && "_signed" || "" }}
 
       - name: Upload APK from Main Android Mobile Repo
         uses: actions/upload-artifact@v4
