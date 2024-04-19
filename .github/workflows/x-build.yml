@@ -121,5 +121,5 @@ jobs:
           PATH_2: "build/outputs"
           PATH_3: "and-${{ steps.test-name.outputs.name }}"
         with:
-          name: main-${{ PATH_3 }}-apk-${{ inputs.oem }}
+          name: main-${{ env.PATH_3 }}-apk-${{ inputs.oem }}
           path: ${{ env.PATH_1 }}/${{ env.PATH_2 }}/apk
