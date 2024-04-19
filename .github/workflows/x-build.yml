@@ -98,13 +98,23 @@ jobs:
           cd android
           ./gradlew assemble${{ env.TEST_FL }}
 
+      - name: Prepare upload directory name
+        id: directory-name
+        run: echo "name=$(echo grep 'app_name' android/app/src/main/res/values/strings.xml | cut -f2 -d ">" | cut -f1 -d "<")" >> $GITHUB_OUTPUT
+
       - name: Rename file
         run: |
           cd android/app/build/outputs/apk/${{ env.TEST_FL }}/release
           mv app-Milestone-release.apk app-Milestone-release${{ env.IS_SIGNED && '_signed' || '' }}.apk
 
+      - name: Test upload name
+        run: echo "Should upload to upload/${ steps.directory-name.outputs.name }"
+          
       - name: Upload APK from Main Android Mobile Repo
         uses: actions/upload-artifact@v4
+        env:
+          PATH_1: "android/app"
+          PATH_2: "build/outputs"
         with:
           name: main-android-apk-${{ inputs.oem }}
-          path: android/app/build/outputs/apk
+          path: ${env.PATH_1}/${env.PATH_2}/apk
