@@ -108,7 +108,7 @@ jobs:
           mv app-Milestone-release.apk app-Milestone-release${{ env.IS_SIGNED && '_signed' || '' }}.apk
 
       - name: Test upload name
-        run: echo "Should upload to upload/${ steps.directory-name.outputs.name }"
+        run: echo "Should upload to upload/${{ steps.directory-name.outputs.name }}"
           
       - name: Upload APK from Main Android Mobile Repo
         uses: actions/upload-artifact@v4
