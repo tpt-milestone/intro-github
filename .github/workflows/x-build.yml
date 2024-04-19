@@ -117,4 +117,4 @@ jobs:
           PATH_2: "build/outputs"
         with:
           name: main-android-apk-${{ inputs.oem }}
-          path: ${{ PATH_1 }}/${{ PATH_2 }}/apk
+          path: ${{ env.PATH_1 }}/${{ env.PATH_2 }}/apk
