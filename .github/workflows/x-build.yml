@@ -100,7 +100,7 @@ jobs:
 
       - name: Prepare upload directory name
         id: directory-name
-        run: echo "name=$(echo grep 'app_name' android/app/src/main/res/values/strings.xml | cut -f2 -d ">" | cut -f1 -d "<")" >> $GITHUB_OUTPUT
+        run: echo """name=$(echo grep 'app_name' android/app/src/main/res/values/strings.xml | cut -f2 -d ">" | cut -f1 -d "<")""" >> $GITHUB_OUTPUT
 
       - name: Rename file
         run: |
@@ -117,4 +117,4 @@ jobs:
           PATH_2: "build/outputs"
         with:
           name: main-android-apk-${{ inputs.oem }}
-          path: $PATH_1/${ PATH_2 }/apk
+          path: ${{ PATH_1 }}/${{ PATH_2 }}/apk
