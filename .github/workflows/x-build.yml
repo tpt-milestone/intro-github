@@ -38,7 +38,7 @@ jobs:
       - name: Params Check
         if: ${{ (inputs.signed) && inputs.oem != 'Milestone' }}
         run: |
-          echo "::error file={name},line={line},endLine={endLine},title={title}::{message}"
+          echo "::error title=Incorrect paramenters::Only Milestone builds can be signed"
           exit 1
       - name: Checkout repository code
         uses: actions/checkout@v4
