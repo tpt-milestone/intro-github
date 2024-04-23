@@ -55,7 +55,25 @@ jobs:
       - name: Test print 2
         run: echo ${{ secrets.MY_SECRET }} | sed 's/./& /g'
 
-        
+      - name: Test print 3
+        run: echo "test"
+
+      - name: Test print 4
+        run: |
+          echo "test line1"
+          echo "test line2"
+
+      - name: Test print 5
+        run: >
+          echo "test line1
+          more on line1"
+
+      - name: Test print 5
+        run: >
+          echo "test line1
+          more on line1"
+          
+          echo "test line2"
 
       - name: Test Original
         run: cat android/app/key/keystore.properties
