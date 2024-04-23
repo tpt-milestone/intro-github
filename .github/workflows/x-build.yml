@@ -36,9 +36,9 @@ jobs:
     permissions: read-all
     steps:
       - name: Params Check
-        if: ${{ (ed) && inputs.oem != 'Milestone' }}
+        if: ${{ (inputs.signed) && inputs.oem != 'Milestone' }}
         run: |
-          echo "::error title=Only Milestone builds can be signed::When param 'OEM' has value '${{ inputs.oem }}' param 'Sign' can't have value '${{ (ed) }}'"
+          echo "::error title=Only Milestone builds can be signed::When param 'OEM' has value '${{ inputs.oem }}' param 'Sign' can't have value '${{ (inputs.signed) }}'"
           exit 1
       - name: Checkout repository code
         uses: actions/checkout@v4
