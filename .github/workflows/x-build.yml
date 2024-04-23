@@ -61,10 +61,7 @@ jobs:
         run: cat android/app/key/keystore.properties
 
       - name: Decode Keystore
-        env:
-          ENCODED_STRING: ${{ secrets.SIGNING_KEY_STORE_ENCODED }}
-        run: |
-          echo $ENCODED_STRING | base64 --decode > android/app/key/release-key.keystore
+        run: echo "${{ secrets.SIGNING_KEY_STORE_ENCODED }}" | base64 --decode > android/app/key/release-key.keystore
 
       #- name: Test configuration
       #  run: printf "storePassword=${{ env.TEST_FL }}\nkeyPassword=${{ github.event_name }}\nkeyAlias=alias\nstoreFile=key/release-key.keystore" > android/keystore.properties
