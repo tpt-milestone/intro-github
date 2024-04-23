@@ -81,14 +81,14 @@ jobs:
         run: cat android/keystore.properties
 
       - name: Decode keystore
-        if: ${{ (inputs.signed) && inputs.oem != 'Milestone' }}
+        if: ${{ (inputs.signed) && inputs.oem == 'Milestone' }}
         env:
           KEY_STORE_ENCODED: ${{ secrets.SIGNING_KEY_STORE_ENCODED }}
         run: |
           echo $KEY_STORE_ENCODED | base64 --decode > android/app/key/release-key.keystore
 
       - name: Replace values in keystore.properties file
-        if: ${{ (inputs.signed) && inputs.oem != 'Milestone' }}
+        if: ${{ (inputs.signed) && inputs.oem == 'Milestone' }}
         run: |
           cat <<EOF > android/app/key/keystore.properties
           keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}
