@@ -36,9 +36,9 @@ jobs:
     permissions: read-all
     steps:
       - name: Params Check
-        if: ${{ (inputs.signed) && inputs.oem != 'Milestone' }}
+        if: ${{ (ed) && inputs.oem != 'Milestone' }}
         run: |
-          echo "::error title=Only Milestone builds can be signed::When param 'OEM' has value '${{ inputs.oem }}' param 'Sign' can't have value '${{ (inputs.signed) }}'"
+          echo "::error title=Only Milestone builds can be signed::When param 'OEM' has value '${{ inputs.oem }}' param 'Sign' can't have value '${{ (ed) }}'"
           exit 1
       - name: Checkout repository code
         uses: actions/checkout@v4
@@ -61,7 +61,10 @@ jobs:
         run: cat android/app/key/keystore.properties
 
       - name: Decode Keystore
-        run: echo "${{ secrets.SIGNING_KEY_STORE_ENCODED }}" | base64 --decode > android/app/key/release-key.keystore
+        env:
+          KEY_STORE_ENCODED: ${{ secrets.SIGNING_KEY_STORE_ENCODED }}
+        run: |
+          echo $KEY_STORE_ENCODED | base64 --decode > android/app/key/release-key.keystore
 
       #- name: Test configuration
       #  run: printf "storePassword=${{ env.TEST_FL }}\nkeyPassword=${{ github.event_name }}\nkeyAlias=alias\nstoreFile=key/release-key.keystore" > android/keystore.properties
