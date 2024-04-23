@@ -36,7 +36,7 @@ jobs:
     permissions: read-all
     steps:
       - name: Params Check
-        if: (inputs.signed) == 'true' && inputs.oem != 'Milestone'
+        if: ${{ (inputs.signed) && inputs.oem != 'Milestone' }}
         run: |
           echo "::error file={name},line={line},endLine={endLine},title={title}::{message}"
           exit 1
