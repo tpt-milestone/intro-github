@@ -114,7 +114,7 @@ jobs:
       - name: Rename file
         run: |
           cd android/app/build/outputs/apk/${{ env.TEST_FL }}/release
-          mv app-Milestone-release.apk app-Milestone-release${{ (input.signed) && '_signed' || '' }}.apk
+          mv app-Milestone-release.apk app-Milestone-release${{ (inputs.signed) && '_signed' || '' }}.apk
 
       - name: Test upload name
         run: echo "Should upload to upload/${{ steps.directory-name.outputs.name }}"
