@@ -20,6 +20,10 @@ on:
         description: 'Sign (Upload Ready, Milestone Only)'
         required: true
         type: boolean
+      skip-build:
+        description: 'Skip Build'
+        required: true
+        type: boolean
   push:
     branches: 
       - main
@@ -116,6 +120,7 @@ jobs:
           EOF
 
       - name: Build code
+        if: ${{ (inputs.skip-build) != 'true' }}
         run: |
           cd android
           ./gradlew assemble${{ env.TEST_FL }}
