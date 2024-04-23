@@ -38,7 +38,7 @@ jobs:
       - name: Params Check
         if: ${{ (inputs.signed) && inputs.oem != 'Milestone' }}
         run: |
-          echo "::error title=Incorrect input params: When 'OEM' has value '${{ inputs.oem }}', 'Sign' can't be '${{ (inputs.signed) }}'::Only Milestone builds can be signed"
+          echo "::error title=Incorrect input params: When param 'OEM' has value '${{ inputs.oem }}' param 'Sign' can't have value '${{ (inputs.signed) }}'::Only Milestone builds can be signed"
           exit 1
       - name: Checkout repository code
         uses: actions/checkout@v4
