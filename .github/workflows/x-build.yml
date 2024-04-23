@@ -72,10 +72,10 @@ jobs:
       - name: Test config 3
         run: |
           cat <<EOF > android/keystore.properties
-            storePassword=${{ env.TEST_FL }}
+            storePassword='${{ env.TEST_FL }}'
             keyPassword=${{ github.event_name }}
           keyAlias=alias
-          storeFile=key/release-key.keystore
+          storeFile='key/release-key.keystore'
           EOF
       #- name: Test configuration 2
       #  run: printf ("storePassword=${{ env.TEST_FL }}"
@@ -90,10 +90,10 @@ jobs:
         if: ${{ (inputs.signed) && inputs.oem == 'Milestone' }}
         run: |
           cat <<EOF > android/app/key/keystore.properties
-          storePassword=${{ secrets.SIGNING_STORE_PASSWORD }}
-          keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}
-          keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}
-          storeFile=key/release-key.keystore
+          keyAlias='${{ secrets.SIGNING_KEY_ALIAS }}'
+          keyPassword='${{ secrets.SIGNING_KEY_PASSWORD }}'
+          storeFile='key/release-key.keystore'
+          storePassword='${{ secrets.SIGNING_STORE_PASSWORD }}'
           EOF
 
       - name: Build code
