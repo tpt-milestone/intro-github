@@ -35,6 +35,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions: read-all
     steps:
+      - name: Params Check
+        if: (inputs.signed) == 'true' && inputs.oem != 'Milestone'
+        run: |
+          echo "::error file={name},line={line},endLine={endLine},title={title}::{message}"
+          exit 1
       - name: Checkout repository code
         uses: actions/checkout@v4
 
