@@ -2,7 +2,7 @@ name: Android Build
 
 env:
   TEST_FL: ${{ inputs.oem || 'Milestone' }}
-  IS_SIGNED: ${{ (inputs.signed) && inputs.oem == 'Milestone' }}
+  IS_SIGNED: ${{ (inputs.signed) || false }}
   
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ on:
 
 run-name: >-
   ${{ github.event_name == 'workflow_dispatch'
-    && format('Android Build {0}{1}', inputs.oem, inputs.signed == 'true' && inputs.oem == 'Milestone' && ' Signed' || '')
+    && format('Android Build {0}{1}', inputs.oem, (inputs.signed) && ' Signed' || '')
     || '' }}
 
 jobs:
@@ -114,7 +114,7 @@ jobs:
       - name: Rename file
         run: |
           cd android/app/build/outputs/apk/${{ env.TEST_FL }}/release
-          mv app-Milestone-release.apk app-Milestone-release${{ env.IS_SIGNED && '_signed' || '' }}.apk
+          mv app-Milestone-release.apk app-Milestone-release${{ (input.signed) && '_signed' || '' }}.apk
 
       - name: Test upload name
         run: echo "Should upload to upload/${{ steps.directory-name.outputs.name }}"
