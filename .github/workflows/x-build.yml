@@ -147,7 +147,7 @@ jobs:
 
       - name: Test upload dir name
         env:
-          TEST_VAR: ${{ $(echo github.ref_name | sed 's/m/g/g') }}
+          TEST_VAR: $( echo ${{ github.ref_name }} | sed 's/m/g/g')
           TEST_SECOND: ${{ format('{0}{1}', env.TEST_VAR, ' and more') }}
         run: |
           echo "Should upload to upload/${{ steps.directory-name-test.outputs.name }}"
