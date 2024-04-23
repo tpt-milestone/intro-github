@@ -24,7 +24,7 @@ on:
     branches: 
       - main
 
-run-name: >-
+run-name: >
   ${{ github.event_name == 'workflow_dispatch'
     && format('Android Build {0}{1}', inputs.oem, (inputs.signed) && ' Signed' || '')
     || '' }}
