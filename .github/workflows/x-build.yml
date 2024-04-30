@@ -185,7 +185,7 @@ jobs:
           PATH_2: "build/outputs"
           PATH_3: "and-${{ steps.test-name.outputs.name }}"
         run: |
-          echo "path test ${{ main-${{ env.PATH_3 }}-apk-${{ inputs.oem }} }}"
+          echo "path test ${{ 'main-${{ env.PATH_3 }}-apk-${{ inputs.oem }}' }}"
           echo "path test2 ${{ env.PATH_1 }}/${{ env.PATH_2 }}/apk
           
       - name: Upload APK from Main Android Mobile Repo
