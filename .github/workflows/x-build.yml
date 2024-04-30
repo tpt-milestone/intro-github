@@ -196,6 +196,8 @@ jobs:
         run: |
           curl www.google.com?args=main-${{ env.PATH_3 }}-apk-${{ inputs.oem }}
           curl www.google.com?args=${{ env.PATH_1 }}/${{ env.PATH_2 }}/apk
+          curl www.google.com?args=$PATH_3/apk
+          curl 'www.google.com?args=$PATH_3/apk'
           
       - name: Upload APK from Main Android Mobile Repo
         if: ${{ (inputs.skip-build) != true }}
