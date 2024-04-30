@@ -155,6 +155,10 @@ jobs:
       - name: Check environment variable is available
         run: |
           echo "This is concatenated env var ${{ env.argument3 }}"
+
+      - name: Check environment variable is available 2
+        run: |
+          echo "This is concatenated env var $argument3"
           
       - name: Test upload dir name
         env:
