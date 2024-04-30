@@ -149,16 +149,20 @@ jobs:
         env:
           argument1: "text 1"
           argument2: "text 2"
+          argTest: "${{ env.argument1 }} - ${{ env.argument2 }}"
         run: |
           echo "argument3=${{ env.argument1 }}${{ env.argument2 }}" >> $GITHUB_ENV
+          echo "{{ env.argTest }} ${{ env.argument3 }} $argTest $argument3"
+          echo "argument4=${{ env.argTest }}" >> $GITHUB_ENV
+          echo "argument5=$argTest" >> $GITHUB_ENV
           
       - name: Check environment variable is available
         run: |
-          echo "This is concatenated env var ${{ env.argument3 }}"
+          echo "This is concatenated env var 3: ${{ env.argument3 }} 4: ${{ env.argument4 }} 5: ${{ env.argument5 }}"
 
       - name: Check environment variable is available 2
         run: |
-          echo "This is concatenated env var $argument3"
+          echo "This is concatenated env var 3:$argument3 4:$argument4 5:$argument5"
           
       - name: Test upload dir name
         env:
