@@ -192,15 +192,35 @@ jobs:
           echo "path test 'main-${{ env.PATH_3 }}-apk-${{ inputs.oem }}'"
           echo "path test2 ${{ env.PATH_1 }}/${{ env.PATH_2 }}/apk"
 
+      - name: Make test file
+        run: |
+          cat <<EOF > test.txt
+          This is the file contentttt.
+          EOF
+
+      - name: Prepare branch name
+        run: echo "BRANCH_NAME=$(echo '${{ github.ref_name }}' | sed 's/#/_/g')" >> $GITHUB_ENV
+
+      - name: Prepare file names name
+        run: |
+          echo "DEBUG_APK_FILENAME=${{ env.TARGET_OEM }}-debug_${{ github.run_number }}.apk" > $GITHUB_ENV
+          echo "RELEASE_APK_FILENAME=${{ env.TARGET_OEM }}-release_${{ github.run_number }}${{ (inputs.signed) && '_signed' || '' }}.apk" > $GITHUB_ENV
+          
+      - name: Rename files
+        run: |
+          cp test.txt ${{ env.DEBUG_APK_FILENAME }}
+          cp test.txt ${{ env.RELEASE_APK_FILENAME }}
+
       - name: Test local env curl
         env:
           PATH_1: "android/app"
           PATH_2: "build/outputs"
           PATH_3: "and-${{ steps.test-name.outputs.name }}"
+          UPLOAD_PATH: "test/repo/${{ env.BRANCH_NAME }}/"
         run: |
           curl www.google.com?args=main-${{ env.PATH_3 }}-apk-${{ inputs.oem }}
           curl www.google.com?args=${{ env.PATH_1 }}/${{ env.PATH_2 }}/apk
-          curl www.google.com?args=$PATH_3/apk
+          curl www.google.com?args=${{ env.UPLOAD_PATH }}/apk
           curl 'www.google.com?args=$PATH_3/apk'
           
       - name: Upload APK from Main Android Mobile Repo
