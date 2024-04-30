@@ -171,14 +171,25 @@ jobs:
           echo "Should upload also also also to upload/${{ env.TEST_SECOND }}"
         
       - name: Rename file
+        if: ${{ (inputs.skip-build) != true }}
         run: |
           cd android/app/build/outputs/apk/${{ env.TEST_FL }}/release
           mv app-Milestone-release.apk app-Milestone-release${{ (inputs.signed) && '_signed' || '' }}.apk
 
       - name: Test upload name
         run: echo "Should upload to upload/${{ steps.directory-name.outputs.name }}"
+
+      - name: Test local env
+        env:
+          PATH_1: "android/app"
+          PATH_2: "build/outputs"
+          PATH_3: "and-${{ steps.test-name.outputs.name }}"
+        run: |
+          echo "path test ${{ main-${{ env.PATH_3 }}-apk-${{ inputs.oem }} }}"
+          echo "path test2 ${{ env.PATH_1 }}/${{ env.PATH_2 }}/apk
           
       - name: Upload APK from Main Android Mobile Repo
+        if: ${{ (inputs.skip-build) != true }}
         uses: actions/upload-artifact@v4
         env:
           PATH_1: "android/app"
