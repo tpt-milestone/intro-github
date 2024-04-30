@@ -1,0 +1,5 @@
+<resources>
+
+    <!-- Automatically generated file. DO NOT MODIFY -->
+    <string name="app_version" translatable="false">24.1</string>
+</resources>
