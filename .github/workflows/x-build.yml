@@ -203,8 +203,8 @@ jobs:
 
       - name: Prepare file names name
         run: |
-          echo "DEBUG_APK_FILENAME=${{ env.TARGET_OEM }}-debug_${{ github.run_number }}.apk" > $GITHUB_ENV
-          echo "RELEASE_APK_FILENAME=${{ env.TARGET_OEM }}-release_${{ github.run_number }}${{ (inputs.signed) && '_signed' || '' }}.apk" > $GITHUB_ENV
+          echo "DEBUG_APK_FILENAME=${{ env.TARGET_OEM }}-debug_${{ github.run_number }}.apk" >> $GITHUB_ENV
+          echo "RELEASE_APK_FILENAME=${{ env.TARGET_OEM }}-release_${{ github.run_number }}${{ (inputs.signed) && '_signed' || '' }}.apk" >> $GITHUB_ENV
           
       - name: Rename files
         run: |
