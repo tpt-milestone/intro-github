@@ -199,10 +199,8 @@ jobs:
           EOF
 
       - name: Extract version
-        run: >
-          echo "CODE_VERSION=$( grep 'app_version'
-            android/app/versions.txt
-            | cut -f2 -d ">" | cut -f1 -d "<" )" >> $GITHUB_ENV
+        run: |
+          echo "CODE_VERSION=$( grep 'app_version' android/app/versions.txt | cut -f2 -d ">" | cut -f1 -d "<" )" >> $GITHUB_ENV
 
       - name: Prepare branch name
         run: |
