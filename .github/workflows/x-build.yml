@@ -74,6 +74,10 @@ jobs:
         run: |
           echo "test line1"
           echo "test line2"
+          echo \
+            "test line3"
+          echo "test \
+            line4"
 
       - name: Test print 5
         run: >
