@@ -216,8 +216,10 @@ jobs:
           
       - name: Rename files
         run: |
-          cp test.txt ${{ env.DEBUG_APK_FILENAME }}
-          cp test.txt ${{ env.RELEASE_APK_FILENAME }}
+          cp test.txt \
+              ${{ env.DEBUG_APK_FILENAME }}
+          cp \
+            test.txt ${{ env.RELEASE_APK_FILENAME }}
 
       - name: Test local env curl
         env:
