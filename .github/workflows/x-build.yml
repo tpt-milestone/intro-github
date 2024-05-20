@@ -56,13 +56,13 @@ jobs:
       - name: Test print
         run: echo "test"
 
-      - name: Loop test
-        env:
-          FILES: PROFILE.md README.md LICENSE
-        run: >
-          for f in $FILES
-          do cat f
-          done
+      #- name: Loop test
+      #  env:
+      #    FILES: PROFILE.md README.md LICENSE
+      #  run: >
+      #    for f in $FILES
+      #    do cat f
+      #    done
 
       - name: Loop 2
         run: |
