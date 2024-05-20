@@ -57,13 +57,13 @@ jobs:
         run: echo "test"
 
       - name: Cat test p
-        run: echo PROFILE.md
+        run: cat PROFILE.md
 
       - name: Cat test r
-        run: echo README.md
+        run: cat README.md
 
       - name: Cat test l
-        run: echo LICENSE
+        run: cat LICENSE
 
       - name: Loop test
         env:
