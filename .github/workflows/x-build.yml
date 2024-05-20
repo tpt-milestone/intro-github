@@ -69,8 +69,8 @@ jobs:
         env:
           FILES: PROFILE.md README.md LICENSE
         run: >
-          for f in $FILES
-          do cat $f
+          for f in $FILES;
+          do cat $f;
           done
 
       - name: Loop 2
