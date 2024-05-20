@@ -56,6 +56,21 @@ jobs:
       - name: Test print
         run: echo "test"
 
+      - name: Loop test
+        env:
+          FILES: PROFILE.md README.md LICENSE
+        run: >
+          for f in $FILES;
+          do cat f;
+          done
+
+      - name: Loop 2
+        run: |
+          for file in PROFILE.md README.md LICENSE
+          do
+            cat file
+          done
+
       - name: Test print inputs
         run: |
           echo ${{ (inputs.skip-build) }}
