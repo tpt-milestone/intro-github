@@ -3,7 +3,7 @@ name: Android Build
 env:
   TEST_FL: ${{ inputs.oem || 'Milestone' }}
   IS_SIGNED: ${{ (inputs.signed) || false }}
-  FILES: PROFILE.md README.md LICENSE
+  FILES: PROFILE README
   
 on:
   workflow_dispatch:
@@ -69,7 +69,7 @@ jobs:
       - name: Loop test
         run: >
           for f in ${{ env.FILES }};
-          do cat $f;
+          do cat ${f}.md;
           done
 
       - name: Loop 2
@@ -77,7 +77,7 @@ jobs:
           for file in ${{ env.FILES }}
           do
             echo "one"
-            cat $file
+            cat ${file}.md
           done
 
       - name: Test print inputs
