@@ -62,7 +62,13 @@ jobs:
 
       - name: Zip test p
         run: |
-          zip -r test.zip PROFILE.md
+          mkdir t1
+          mkdir t1/t2
+          cp PROFILE.md t1/t2
+          cd t1/t2
+          which zip
+          zip -r ../../test.zip *.md
+          cd ../..
           ls
 
       - name: Cat test r
