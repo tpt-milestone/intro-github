@@ -60,6 +60,11 @@ jobs:
       - name: Cat test p
         run: cat PROFILE.md
 
+      - name: Zip test p
+        run: |
+          zip -r test.zip PROFILE.md
+          ls
+
       - name: Cat test r
         run: cat README.md
 
