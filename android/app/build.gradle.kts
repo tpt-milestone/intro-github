@@ -51,6 +51,7 @@ android {
     productFlavors {
         create("Milestone") {
             buildConfigField ("String", "flavor_value", "\"Milestone\"")
+            buildConfigField ("String", "test", nUsername)
             buildConfigField ("Boolean", "is_oem", "false")
             signingConfig = signingConfigs.getByName("MilestoneInternal")
         }
