@@ -54,6 +54,14 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
+      - name: T1
+        env:
+          T1: "T1"
+          T2: "T2"
+        run: ./gradlew assemble${{ env.TARGET_OEM }} \
+          -PnUsername ${{ env.T1 }} \
+          -PnPassword ${{ env.T2 }}
+
       - name: Test print
         run: echo "test"
 
