@@ -58,9 +58,11 @@ jobs:
         env:
           T1: "T1"
           T2: "T2"
-        run: ./gradlew assemble${{ env.TARGET_OEM }} \
-          -PnUsername ${{ env.T1 }} \
-          -PnPassword ${{ env.T2 }}
+        run: |
+          cd android
+          ./gradlew assemble${{ env.TARGET_OEM }} \
+            -PnUsername ${{ env.T1 }} \
+            -PnPassword ${{ env.T2 }}
 
       - name: Test print
         run: echo "test"
