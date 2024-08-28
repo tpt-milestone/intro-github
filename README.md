@@ -15,8 +15,8 @@ _Get started using GitHub in less than an hour_
 
 <!-- TOC start -->
 
-- [Link 1](#headline-one)
-- [Link 2](#headline-two)
+- [Link 1](#headline-1)
+- [Link 2](#headline-2)
 
 <!-- TOC end -->
 <!--
