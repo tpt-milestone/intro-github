@@ -13,6 +13,12 @@ _Get started using GitHub in less than an hour_
 
 </header>
 
+<!-- TOC start -->
+
+- [Link 1](#headline-one)
+- [Link 2](#headline-two)
+
+<!-- TOC end -->
 <!--
   <<< Author notes: Finish >>>
   Review what we learned, ask for feedback, provide next steps.
@@ -20,6 +26,8 @@ _Get started using GitHub in less than an hour_
 
 ## Finish
 
+<!-- TOC --><a name="headline-one"></a>
+## Headline 1
 _Congratulations, you've completed this course and joined the world of developers!_
 
 <img src=https://octodex.github.com/images/collabocats.jpg alt=celebrate width=300 align=right>
@@ -30,6 +38,9 @@ Here's a recap of your accomplishments:
 - You created a branch, a commit, and a pull request.
 - You merged a pull request.
 - You made your first contribution! :tada:
+
+<!-- TOC --><a name="headline-two"></a>
+## Headline 2
 
 ### What's next?
 
