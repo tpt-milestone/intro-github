@@ -18,6 +18,8 @@ jobs:
       - name: Create PR
         run: |
           git checkout -b test_branch origin/main
+          git config --global user.name "User-Test1"
+          git config --global user.email "srvgithub@test.xyz"  
           touch test1.txt
           git add test1.txt
           git commit -m "Added test1.txt"
