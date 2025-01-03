@@ -29,11 +29,9 @@ jobs:
           git add test1.txt
           git commit -m "Added test1.txt"
           git push origin test_branch
-          PR_URL=$(gh pr create \
-                --base main \
-                --head test_branch \
-                --title "Automated: Resources update" \
-                --body "This PR tests." \
-                --reviewer "tpt@milestone.dk" )
-          echo "pr_created=true" >> $GITHUB_OUTPUT
-          echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
+          gh pr create \
+            --base main \
+            --head test_branch \
+            --title "Automated: Resources update" \
+            --body "This PR tests." \
+            --reviewer "tpt-milestone"
