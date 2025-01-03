@@ -19,7 +19,7 @@ jobs:
         run: |
           git checkout -b test_branch origin/main
           git config --global user.name "User-Test1"
-          git config --global user.email "srvgithub@test.xyz"  
+          git config --global user.email "tpt@milestone.dk"  
           touch test1.txt
           git add test1.txt
           git commit -m "Added test1.txt"
