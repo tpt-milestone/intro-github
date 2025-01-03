@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions: read-all
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        
       - name: Create PR
         run: |
           git checkout -b test_branch origin/main
