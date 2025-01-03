@@ -1,8 +1,10 @@
 name: Test PR Build
 
 on:
-  workflow_diaspatch:
+  workflow_dispatch:
   push:
+    branches: 
+      - test
 
 jobs:
   build:
