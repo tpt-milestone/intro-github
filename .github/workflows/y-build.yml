@@ -32,12 +32,11 @@ jobs:
           git status
           echo "1"
           git diff --staged
-          echo "2"
-          git diff --staged --name-only > changed_files.txt
+          echo "2
           additions=()
           echo "3"
           echo $additions
-          files=($(cat changed_files.txt))
+          files=($(git diff --staged --name-only))
           for file in "${files[@]}"; do
             echo "4"
             content=$(cat "$file" | base64)
