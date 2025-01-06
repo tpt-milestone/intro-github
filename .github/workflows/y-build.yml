@@ -34,20 +34,13 @@ jobs:
           echo "1"
           git diff --staged
           echo "2"
-          git diff --staged --name-only
+          git diff --staged --name-only > changed_files.txt
           additions=()
           echo "3"
           echo $additions
-          for file in "$(git diff --staged --name-only)"; do
+          files=($(cat changed_files.txt))
+          for file in "${files[@]}"; do
             echo "4"
-            content=$(cat "$file" | base64)
-            additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
-          done
-
-          echo "5"
-          echo $additions
-          for file in $(git diff --staged --name-only); do
-            echo "6"
             content=$(cat "$file" | base64)
             additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
           done
