@@ -36,7 +36,7 @@ jobs:
           additions=()
           echo "3"
           echo $additions
-          files=($(git diff --staged --name-only))
+          files=(git diff --staged --name-only)
           for file in "${files[@]}"; do
             echo "4"
             content=$(cat "$file" | base64)
