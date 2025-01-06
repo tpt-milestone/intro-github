@@ -48,13 +48,5 @@ jobs:
             content=$(cat "$file" | base64)
             additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
           done
-
-          echo "7"
-          echo $additions
-          for file in ${{ git diff --name-only}} ; do
-            echo "8"
-            content=$(cat "$file" | base64)
-            additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
-          done
           
           additions_json=$(IFS=,; echo "${additions[*]}")
