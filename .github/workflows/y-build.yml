@@ -29,7 +29,6 @@ jobs:
           echo "test$(git rev-parse HEAD)" >> test2.txt
           echo "1"
           git diff --name-only
-          git commit -m "Added test1.txt"
           echo "2"
           git diff --name-only
           additions=()
@@ -51,5 +50,6 @@ jobs:
 
           git add test1.txt
           git add test2.txt
+          git commit -m "Added test1.txt"
           
           additions_json=$(IFS=,; echo "${additions[*]}")
