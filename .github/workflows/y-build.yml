@@ -27,8 +27,10 @@ jobs:
           git config --global user.email "tpt@milestone.dk"  
           echo "test$(git rev-parse HEAD)" >> test1.txt
           echo "test$(git rev-parse HEAD)" >> test2.txt
+          echo "0"
+          git status
           echo "1"
-          git diff --name-only
+          git diff
           echo "2"
           git diff --name-only
           additions=()
