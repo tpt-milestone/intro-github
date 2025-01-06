@@ -26,9 +26,7 @@ jobs:
           git config --global user.name "User-Test1"
           git config --global user.email "tpt@milestone.dk"  
           echo "test$(git rev-parse HEAD)" >> test1.txt
-          git add test1.txt
           echo "test$(git rev-parse HEAD)" >> test2.txt
-          git add test2.txt
           echo "0"
           git status
           echo "1"
@@ -47,8 +45,11 @@ jobs:
           
           echo "5"
           echo $additions
+          git rm changed_files.txt
 
+          git add .
           git commit -m "Added test1.txt"
+          git push origin test_branch
           
           additions_json=$(IFS=,; echo "${additions[*]}")
           echo $additions_json
