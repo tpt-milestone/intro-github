@@ -27,11 +27,34 @@ jobs:
           git config --global user.email "tpt@milestone.dk"  
           touch test1.txt
           git add test1.txt
+          echo "1"
+          git diff --name-only
           git commit -m "Added test1.txt"
-          git push origin test_branch
-          gh pr create \
-            --base main \
-            --head test_branch \
-            --title "Automated: Resources update" \
-            --body "This PR tests." \
-            --reviewer "tpt-milestone"
+          echo "2"
+          git diff --name-only
+          additions=()
+          echo "3"
+          echo $additions
+          for file in "$(git diff --name-only)"; do
+            echo "4"
+            content=$(cat "$file" | base64)
+            additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
+          done
+
+          echo "5"
+          echo $additions
+          for file in $(git diff --name-only); do
+            echo "6"
+            content=$(cat "$file" | base64)
+            additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
+          done
+
+          echo "7"
+          echo $additions
+          for file in ${{ git diff --name-only}} ; do
+            echo "8"
+            content=$(cat "$file" | base64)
+            additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
+          done
+          
+          additions_json=$(IFS=,; echo "${additions[*]}")
