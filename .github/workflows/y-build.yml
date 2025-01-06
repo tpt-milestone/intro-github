@@ -22,7 +22,7 @@ jobs:
         
       - name: Create PR
         run: |
-          git checkout -b test_branch origin/main
+          git checkout -b test_branch
           git config --global user.name "User-Test1"
           git config --global user.email "tpt@milestone.dk"  
           echo "test$(git rev-parse HEAD)" >> test1.txt
