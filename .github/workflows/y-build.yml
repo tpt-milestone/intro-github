@@ -26,9 +26,7 @@ jobs:
           git config --global user.name "User-Test1"
           git config --global user.email "tpt@milestone.dk"  
           echo "test$(git rev-parse HEAD)" >> test1.txt
-          git add test1.txt
           echo "test$(git rev-parse HEAD)" >> test2.txt
-          git add test2.txt
           echo "1"
           git diff --name-only
           git commit -m "Added test1.txt"
@@ -50,5 +48,8 @@ jobs:
             content=$(cat "$file" | base64)
             additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
           done
+
+          git add test1.txt
+          git add test2.txt
           
           additions_json=$(IFS=,; echo "${additions[*]}")
