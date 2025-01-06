@@ -44,7 +44,11 @@ jobs:
             content=$(cat "$file" | base64)
             additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
           done
+          
+          echo "5"
+          echo $additions
 
           git commit -m "Added test1.txt"
           
           additions_json=$(IFS=,; echo "${additions[*]}")
+          echo $additions_json
