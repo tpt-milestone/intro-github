@@ -26,17 +26,19 @@ jobs:
           git config --global user.name "User-Test1"
           git config --global user.email "tpt@milestone.dk"  
           echo "test$(git rev-parse HEAD)" >> test1.txt
+          git add test1.txt
           echo "test$(git rev-parse HEAD)" >> test2.txt
+          git add test2.txt
           echo "0"
           git status
           echo "1"
-          git diff
+          git diff --staged
           echo "2"
-          git diff --name-only
+          git diff --staged --name-only
           additions=()
           echo "3"
           echo $additions
-          for file in "$(git diff --name-only)"; do
+          for file in "$(git diff --staged --name-only)"; do
             echo "4"
             content=$(cat "$file" | base64)
             additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
@@ -44,14 +46,12 @@ jobs:
 
           echo "5"
           echo $additions
-          for file in $(git diff --name-only); do
+          for file in $(git diff --staged --name-only); do
             echo "6"
             content=$(cat "$file" | base64)
             additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
           done
 
-          git add test1.txt
-          git add test2.txt
           git commit -m "Added test1.txt"
           
           additions_json=$(IFS=,; echo "${additions[*]}")
