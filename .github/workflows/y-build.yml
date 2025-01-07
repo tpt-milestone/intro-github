@@ -79,6 +79,9 @@ jobs:
           $files[][contents]=$(base64 -w0 test1.txt)
           $files[][path]="test2.txt"
           $files[][contents]=$(base64 -w0 test2.txt)
+          
+          echo "9"
+          echo "${files[1]}"
         
           gh api graphql \
             -F githubRepository="tpt-milestone/intro-github" \
