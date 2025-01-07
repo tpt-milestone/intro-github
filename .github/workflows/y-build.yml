@@ -74,33 +74,43 @@ jobs:
           echo "8"
           echo "${additions[1]}"
 
-          files=()
-          $files[][path]="test1.txt"
-          $files[][contents]=$(base64 -w0 test1.txt)
-          $files[][path]="test2.txt"
-          $files[][contents]=$(base64 -w0 test2.txt)
-          
-          echo "9"
-          echo "${files[1]}"
-          
           p=()
-          $p[0][path]="t1.txt"
-          $p[0][contents]="content1"
+          # Add JSON objects to the array
+          p+=('{"path": "test1.txt", "contents": "dGVzdDEuLi4="}')
+          p+=('{"path": "test2.txt", "contents": "dGVzdDIuLi4="}')
+
+          # Convert the array to a JSON array
+          p_json=$(printf '%s\n' "${p[@]}" | jq -s .)
+
+          # Print the JSON array
+          echo "$p_json"
+          
+          # Print the JSON array's first item
+          echo $(echo $p_json | jq '.[0]')
+
+          files=()
+          $files[0][path]="t1.txt"
+          $files[0][contents]="content1"
+
           echo "10"
-          echo "${p[0]}"
+          echo "${files[0]}"
+
           
           p2=()
           $p2[0]={ path:"t1.txt", contents:"c1" }
+
           echo "10"
           echo "${p2[0]}"
           
           p3=()
           $p3[0]={ "path":"t1.txt", "contents":"c1" }
+
           echo "10"
           echo "${p3[0]}"
           
           p4=()
           $p4[0]="{ \"path\":\"t1.txt\", \"contents\":\"c1\" }"
+
           echo "10"
           echo "${p4[0]}"
         
@@ -109,5 +119,5 @@ jobs:
             -F branchName=$BRANCH_NAME \
             -F expectedHeadOid=$(git rev-parse HEAD) \
             -F commitMessage="Updated some files" \
-            -F files=$files \
+            -F files=$p_json \
             -F 'query=@.github/api/createCommitOnBranch.gql'
