@@ -35,6 +35,8 @@ jobs:
           git add test2.txt
 
       - name: Prepare variable
+        env:
+          BRANCH_NAME: test_branch_${{ github.run_number }}
         run: |
           echo "COMMAND_VALUE_1=git add ." >> $GITHUB_ENV
           echo "COMMAND_VALUE_2=git diff --staged --name-only > changed_files.txt" >> $GITHUB_ENV
