@@ -76,13 +76,13 @@ jobs:
           echo "p1"
           p1="123"
           echo $p1
-          $p1="${p1}asd"
+          p1="${p1}asd"
           echo $p1
           
           echo "p2"
           p2="123"
           echo $p2
-          $p2="$(echo $p2)asdfg"
+          p2="$(echo $p2)asdfg"
           echo $p2
           
           fileParam=""
