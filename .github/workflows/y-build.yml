@@ -89,7 +89,7 @@ jobs:
           
           fileParam=""
           for file in "${files[@]}"; do
-            content=$(cat "$file" | base64)
+            content=$(base64 -w0 $file)
             echo "File: $file, Content: $content"
             fileParam="${fileParam} -F files[][path]=\"$file\" -F files[][contents]=\"$content\""
           done
