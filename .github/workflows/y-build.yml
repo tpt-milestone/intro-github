@@ -87,16 +87,6 @@ jobs:
           
           # Print the JSON array's first item
           echo $(echo $p_json | jq '.[0]')
-
-          p5=()
-          $p5[]={ path:"t1.txt", contents:"c1" }
-          echo "10"
-          echo "${p5[0]}"
-          
-          p6=()
-          $p6[]={ "path":"t1.txt", "contents":"c1" }
-          echo "10"
-          echo "${p6[0]}"
         
           gh api graphql \
             -F githubRepository="tpt-milestone/intro-github" \
