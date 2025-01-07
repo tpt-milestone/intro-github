@@ -45,53 +45,21 @@ jobs:
           
           additions=()
           files=($(cat changed_files.txt))
-
-          echo "1"
-          echo $files
           
           for file in "${files[@]}"; do
-            echo "2"
             content=$(cat "$file" | base64)
             additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
           done
-
-          echo "3"
-          echo $additions
           
           additions_json=$(printf '%s\n' "${additions[@]}" | jq -s .)
-          echo "4"
+          echo "1"
           echo $additions_json
           
-          echo "5"
-          echo $(echo $additions_json | jq '.[0]')
           
-          echo "6"
-          echo $(echo $additions_json | jq '.[1]')
-
-          echo "7"
-          echo "${additions[0]}"
-          
-          echo "8"
-          echo "${additions[1]}"
-
-          p=()
-          # Add JSON objects to the array
-          p+=('{"path": "test1.txt", "contents": "dGVzdDEuLi4="}')
-          p+=('{"path": "test2.txt", "contents": "dGVzdDIuLi4="}')
-
-          # Convert the array to a JSON array
-          p_json=$(printf '%s\n' "${p[@]}" | jq -s .)
-
-          # Print the JSON array
-          echo "$p_json"
-          
-          # Print the JSON array's first item
-          echo $(echo $p_json | jq '.[0]')
-        
           gh api graphql \
             -F githubRepository="tpt-milestone/intro-github" \
             -F branchName=$BRANCH_NAME \
             -F expectedHeadOid=$(git rev-parse HEAD) \
             -F commitMessage="Updated some files" \
-            -F files="$p_json" \
+            -F files="$additions_json" \
             -F 'query=@.github/api/createCommitOnBranch.gql'
