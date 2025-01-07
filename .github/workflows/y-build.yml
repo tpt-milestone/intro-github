@@ -34,17 +34,25 @@ jobs:
           echo "test$(git rev-parse HEAD)" >> test2.txt
           git add test2.txt
 
+      - name: Prepare variable
+        run: |
+          echo "COMMAND_VALUE_1=git add ." >> $GITHUB_ENV
+          echo "COMMAND_VALUE_2=git diff --staged --name-only > changed_files.txt" >> $GITHUB_ENV
+          echo "COMMAND_VALUE_3=cat changed_files.txt" >> $GITHUB_ENV
+  
+
+
           
       - name: Commit Changes
         env:
           BRANCH_NAME: test_branch_${{ github.run_number }}
         run: |
-          git add .
+          eval $COMMAND_VALUE_1
 
-          git diff --staged --name-only > changed_files.txt
+          eval $COMMAND_VALUE_2
 
           echo "Changed files:"
-          cat changed_files.txt
+          eval $COMMAND_VALUE_3
 
           additions=()
           files=($(cat changed_files.txt))
