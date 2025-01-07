@@ -33,7 +33,7 @@ jobs:
           git add test1.txt
           echo "test$(git rev-parse HEAD)" >> test2.txt
           git add test2.txt
-          cp x.png test_image.png
+          cp images/x.png test_image.png
           git add test_image.png
 
       - name: Prepare variable
