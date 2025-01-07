@@ -93,5 +93,5 @@ jobs:
             -F branchName=$BRANCH_NAME \
             -F expectedHeadOid=$(git rev-parse HEAD) \
             -F commitMessage="Updated some files" \
-            -F files=${{ p }} \
+            -F files="$p_json" \
             -F 'query=@.github/api/createCommitOnBranch.gql'
