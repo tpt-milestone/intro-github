@@ -88,31 +88,25 @@ jobs:
           # Print the JSON array's first item
           echo $(echo $p_json | jq '.[0]')
 
-          files=()
-          $files[0][path]="t1.txt"
-          $files[0][contents]="content1"
-
-          echo "10"
-          echo "${files[0]}"
-
-          
           p2=()
           $p2[0]={ path:"t1.txt", contents:"c1" }
-
           echo "10"
           echo "${p2[0]}"
           
           p3=()
           $p3[0]={ "path":"t1.txt", "contents":"c1" }
-
           echo "10"
           echo "${p3[0]}"
           
           p4=()
           $p4[0]="{ \"path\":\"t1.txt\", \"contents\":\"c1\" }"
-
           echo "10"
           echo "${p4[0]}"
+
+          p5=()
+          $p5[]={ path:"t1.txt", contents:"c1" }
+          echo "10"
+          echo "${p5[0]}"
         
           gh api graphql \
             -F githubRepository="tpt-milestone/intro-github" \
