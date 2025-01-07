@@ -40,22 +40,30 @@ jobs:
           BRANCH_NAME: test_branch_${{ github.run_number }}
         run: |
           git add .
-          
+
           git diff --staged --name-only > changed_files.txt
-          
+
+          echo "Changed files:"
+          cat changed_files.txt
+
           additions=()
           files=($(cat changed_files.txt))
-          
+
+          echo "Files array:"
+          for file in "${files[@]}"; do
+            echo "$file"
+          done
+
           for file in "${files[@]}"; do
             content=$(cat "$file" | base64)
+            echo "File: $file, Content: $content"
             additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
           done
-          
+
           additions_json=$(printf '%s\n' "${additions[@]}" | jq -s .)
-          echo "1"
-          echo $additions_json
-          
-          
+          echo "Additions JSON:"
+          echo "$additions_json"
+
           gh api graphql \
             -F githubRepository="tpt-milestone/intro-github" \
             -F branchName=$BRANCH_NAME \
