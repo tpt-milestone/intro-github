@@ -73,12 +73,17 @@ jobs:
           
           echo "8"
           echo "${additions[1]}"
+
+          files=()
+          $files[][path]="test1.txt"
+          $files[][contents]=$(base64 -w0 test1.txt)
+          $files[][path]="test2.txt"
+          $files[][contents]=$(base64 -w0 test2.txt)
         
           gh api graphql \
             -F githubRepository="tpt-milestone/intro-github" \
             -F branchName=$BRANCH_NAME \
             -F expectedHeadOid=$(git rev-parse HEAD) \
             -F commitMessage="Updated some files" \
-            -F files[][path]="test1.txt" -F files[][contents]=$(base64 -w0 test1.txt) \
-            -F files[][path]="test2.txt" -F files[][contents]=$(base64 -w0 test2.txt) \
+            -F files=$files \
             -F 'query=@.github/api/createCommitOnBranch.gql'
