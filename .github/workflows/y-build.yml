@@ -38,7 +38,7 @@ jobs:
         run: |
           echo "COMMAND_VALUE_1=git add ." >> $GITHUB_ENV
           echo "COMMAND_VALUE_2=git diff --staged --name-only > changed_files.txt" >> $GITHUB_ENV
-          echo "COMMAND_VALUE_3=echo \"Changed files:\"\cat changed_files.txt" >> $GITHUB_ENV
+          echo "COMMAND_VALUE_3=echo \"Changed files:\"\ncat changed_files.txt" >> $GITHUB_ENV
   
 
 
@@ -52,6 +52,9 @@ jobs:
           eval $COMMAND_VALUE_2
 
           eval $COMMAND_VALUE_3
+
+          echo "5"
+          ${{ env.COMMAND_VALUE_3 }}
 
           additions=()
           files=($(cat changed_files.txt))
