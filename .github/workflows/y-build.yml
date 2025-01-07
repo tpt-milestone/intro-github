@@ -31,8 +31,6 @@ jobs:
           git push -u origin $BRANCH_NAME
           echo "test$(git rev-parse HEAD)" >> test1.txt
           git add test1.txt
-          echo "test$(git rev-parse HEAD)" >> test2.txt
-          git add test2.txt
 
           
       - name: Commit Changes
