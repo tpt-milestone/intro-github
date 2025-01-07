@@ -47,6 +47,7 @@ jobs:
             -F branchName=$BRANCH_NAME \
             -F expectedHeadOid=$(git rev-parse HEAD) \
             -F commitMessage=\"Updated some files\" \
+            -F files[][path]="test1.txt" -F -files[][contents]="dGVzdDE3M2ZhYTEyNzJiNDc3OTdmZjI0NWZkM2MwZmNiMzRjMzAyOTJkY2MK" -F files[][path]="test2.txt" -F -files[][contents]="dGVzdDE3M2ZhYTEyNzJiNDc3OTdmZjI0NWZkM2MwZmNiMzRjMzAyOTJkY2MK"
             -F 'query=@.github/api/createCommitOnBranch.gql'" >> $GITHUB_ENV
   
 
@@ -89,7 +90,7 @@ jobs:
           for file in "${files[@]}"; do
             content=$(cat "$file" | base64)
             echo "File: $file, Content: $content"
-            fileParam="${fileParam} -F files[][path]=\"$file\" -F -files[][contents]=\"$content\""
+            # fileParam="${fileParam} -F files[][path]=\"$file\" -F -files[][contents]=\"$content\""
           done
           echo "COMMAND_VALUE_5=$COMMAND_VALUE_5 $fileParam" >> $GITHUB_ENV
 
