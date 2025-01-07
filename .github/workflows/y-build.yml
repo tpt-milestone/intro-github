@@ -47,7 +47,7 @@ jobs:
             -F branchName=$BRANCH_NAME \
             -F expectedHeadOid=$(git rev-parse HEAD) \
             -F commitMessage=\"Updated some files\" \
-            -F files[][path]="test1.txt" -F -files[][contents]="dGVzdDE3M2ZhYTEyNzJiNDc3OTdmZjI0NWZkM2MwZmNiMzRjMzAyOTJkY2MK" -F files[][path]="test2.txt" -F -files[][contents]="dGVzdDE3M2ZhYTEyNzJiNDc3OTdmZjI0NWZkM2MwZmNiMzRjMzAyOTJkY2MK"
+            -F files[][path]=\"test1.txt\" -F -files[][contents]=\"dGVzdDE3M2ZhYTEyNzJiNDc3OTdmZjI0NWZkM2MwZmNiMzRjMzAyOTJkY2MK\" -F files[][path]=\"test2.txt\" -F -files[][contents]=\"dGVzdDE3M2ZhYTEyNzJiNDc3OTdmZjI0NWZkM2MwZmNiMzRjMzAyOTJkY2MK\"
             -F 'query=@.github/api/createCommitOnBranch.gql'" >> $GITHUB_ENV
   
 
