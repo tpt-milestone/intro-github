@@ -41,10 +41,10 @@ jobs:
           echo "COMMAND_VALUE_3=echo \"Changed files:\" && cat changed_files.txt" >> $GITHUB_ENV
           echo "COMMAND_VALUE_5= \
           gh api graphql \
-            -F githubRepository="tpt-milestone/intro-github" \
+            -F githubRepository=\"tpt-milestone/intro-github\" \
             -F branchName=$BRANCH_NAME \
             -F expectedHeadOid=$(git rev-parse HEAD) \
-            -F commitMessage="Updated some files" \
+            -F commitMessage=\"Updated some files\" \
             -F 'query=@.github/api/createCommitOnBranch.gql'" >> $GITHUB_ENV
   
 
