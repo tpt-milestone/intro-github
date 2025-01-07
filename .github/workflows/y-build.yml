@@ -65,11 +65,17 @@ jobs:
           
           echo "6"
           echo $(echo $additions_json | jq '.[1]')
+
+          echi "7"
+          echo "${additions[0]}"
+          
+          echi "8"
+          echo "${additions[1]}"
         
           gh api graphql \
             -F githubRepository="tpt-milestone/intro-github" \
             -F branchName=$BRANCH_NAME \
             -F expectedHeadOid=$(git rev-parse HEAD) \
             -F commitMessage="Updated some files" \
-            -F files="$additions_json" \
+            -F files="$additions" \
             -F 'query=@.github/api/createCommitOnBranch.gql'
