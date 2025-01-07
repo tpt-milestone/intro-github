@@ -66,10 +66,10 @@ jobs:
           echo "6"
           echo $(echo $additions_json | jq '.[1]')
 
-          echi "7"
+          echo "7"
           echo "${additions[0]}"
           
-          echi "8"
+          echo "8"
           echo "${additions[1]}"
         
           gh api graphql \
