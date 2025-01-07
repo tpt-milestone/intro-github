@@ -72,13 +72,26 @@ jobs:
           for file in "${files[@]}"; do
             echo "$file"
           done
-
+          
+          echo "p1"
+          p1="123"
+          echo $p1
+          $p1=${p1}asd
+          echo $p1
+          
+          echo "p2"
+          p2="123"
+          echo $p2
+          $p2="$(echo $p2)asdfg"
+          echo $p2
+          
+          fileParam=""
           for file in "${files[@]}"; do
             content=$(cat "$file" | base64)
             echo "File: $file, Content: $content"
-            echo "COMMAND_VALUE_5=$(echo $COMMAND_VALUE_5) -F files[][path]=$file -F files[][contents]=$content" >> $GITHUB_ENV
-
+            fileParam=${fileParam} -F files[][path]=$file -F -files[][contents]=$content
           done
+          echo "COMMAND_VALUE_5=$(echo $COMMAND_VALUE_5) $fileParam >> $GITHUB_ENV
 
           additions_json=$(printf '%s\n' "${additions[@]}" | jq -s .)
           echo "Additions JSON:"
