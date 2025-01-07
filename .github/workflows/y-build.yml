@@ -39,6 +39,13 @@ jobs:
           echo "COMMAND_VALUE_1=git add ." >> $GITHUB_ENV
           echo "COMMAND_VALUE_2=git diff --staged --name-only > changed_files.txt" >> $GITHUB_ENV
           echo "COMMAND_VALUE_3=echo \"Changed files:\" && cat changed_files.txt" >> $GITHUB_ENV
+          echo "COMMAND_VALUE_5= \
+          gh api graphql \
+            -F githubRepository="tpt-milestone/intro-github" \
+            -F branchName=$BRANCH_NAME \
+            -F expectedHeadOid=$(git rev-parse HEAD) \
+            -F commitMessage="Updated some files" \
+            -F 'query=@.github/api/createCommitOnBranch.gql' >> $GITHUB_ENV
   
 
 
@@ -67,17 +74,17 @@ jobs:
           for file in "${files[@]}"; do
             content=$(cat "$file" | base64)
             echo "File: $file, Content: $content"
-            additions+=("{\"path\": \"$file\", \"contents\": \"$content\"}")
+            echo "COMMAND_VALUE_5=$(echo $COMMAND_VALUE_5) -F files[][path]=$file -F files[][contents]=$content" >> $GITHUB_ENV
+
           done
 
           additions_json=$(printf '%s\n' "${additions[@]}" | jq -s .)
           echo "Additions JSON:"
           echo "$additions_json"
 
-          gh api graphql \
-            -F githubRepository="tpt-milestone/intro-github" \
-            -F branchName=$BRANCH_NAME \
-            -F expectedHeadOid=$(git rev-parse HEAD) \
-            -F commitMessage="Updated some files" \
-            -F files="$additions_json" \
-            -F 'query=@.github/api/createCommitOnBranch.gql'
+      - name: Perform Changes
+        run: |
+          echo "11"
+          echo $COMMAND_VALUE_5
+          echo "12"
+          ${{ env.COMMAND_VALUE_5 }}
