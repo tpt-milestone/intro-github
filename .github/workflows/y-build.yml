@@ -108,17 +108,11 @@ jobs:
 
       - name: Find releses
         id: get_all_releases
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const releases = await github.rest.releases.getAll({
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            });
-            const pinkReleases = releases.data
-              .filter(release => release.tag_name.includes('_2'))
-              .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-            core.setOutput('pink_releases', JSON.stringify(pinkReleases.map(release => release.tag_name)));
+        run: |
+          curl -L \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ github.token }}" \
+            https://api.github.com/repos/tpt-milestone/intro-github/releases
 
       - name: Display some releases
         run: |
