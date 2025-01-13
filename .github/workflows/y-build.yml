@@ -113,7 +113,7 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ github.token }}" \
             https://api.github.com/repos/tpt-milestone/intro-github/releases \
-            | jq '[.[] | select(.tag_name | contains("_2"))] | sort_by(.created_at) | reverse' > releases.json
+            | jq '[.[] | select(.tag_name | contains("_2"))] | {tag_name, name, created_at, author: .author.login}] | sort_by(.created_at) | reverse' > releases.json
 
       - name: Display some releases
         run: |
