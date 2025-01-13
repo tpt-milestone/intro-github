@@ -112,8 +112,10 @@ jobs:
           curl -L \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ github.token }}" \
-            https://api.github.com/repos/tpt-milestone/intro-github/releases
+            https://api.github.com/repos/tpt-milestone/intro-github/releases \
+            | jq '[.[] | select(.tag_name | contains("_2"))] | sort_by(.created_at) | reverse' > releases.json
 
       - name: Display some releases
         run: |
-          echo "Pink releases sorted by date: ${{ steps.get_all_releases.outputs.pink_releases }}"
+          echo "Pink releases sorted by date:"
+          cat releases.json
